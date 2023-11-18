@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products with Pagination</title>
+    <link href="webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/ui/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+</head>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <div id="content" class="p-4 p-md-0 pt-5">
+        <h1 class="text-center">LIST OF PRODUCTS</h1>
+        <table class="table table-hover table-bordered">
+            <thead class="bg-gradient">
+            <tr >
+                <th>ID</th>
+                <th>NAME</th>
+                <th>DESCRIPTION</th>
+                <th>UNIT</th>
+                <th>MANUFACTURER</th>
+                <th>STATUS</th>
+                <th colspan="2">
+                    <a  type="button" style="margin-left: 11px" class="btn btn-warning" href="products/show-add-form">New Product</a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product,iStat : ${productPage.content}">
+
+                <td th:text="${product.product_id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.unit}"></td>
+                <td th:text="${product.manufacturer}"></td>
+                <td th:text="${product.status}"></td>
+                <td><a class="btn btn-primary" th:href="@{products/update/{id}(id=${product.product_id})}">Edit</a></td>
+                <td><a class="btn btn-danger" th:href="@{products/delete/{id}(id=${product.product_id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav id="sidebar" class="order-last";>
+        <div class="custom-menu">
+            <button
+                    type="button"
+                    id="sidebarCollapse"
+                    class="btn btn-primary"
+            ></button>
+        </div>
+        <div class="">
+            <h1>
+                <a href="#" class="logo">Admin <span>Dashboard</span></a>
+            </h1>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a href="/admin/home"><span class="fa fa-home mr-3"></span> Home</a>
+                </li>
+                <li>
+                    <a href="/admin/customers"><span class="fa fa-user mr-3"></span> Customer</a>
+                </li>
+                <li>
+                    <a href="/admin/employees"><span class="fa fa-sticky-note mr-3"></span> Employee</a>
+                </li>
+                <li>
+                    <a href="/products"><span class="fa fa-cogs mr-3"></span> Product</a>
+                </li>
+                <li>
+                    <a href="#"
+                    ><span class="fa fa-paper-plane mr-3"></span> Contacts</a
+                    >
+                </li>
+            </ul>
+
+            <div class="mb-5 px-4">
+                <h3 class="h6 mb-3">Subscribe for newsletter</h3>
+                <form action="#" class="subscribe-form">
+                    <div class="form-group d-flex">
+                        <div class="icon"><span class="icon-paper-plane"></span></div>
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter Email Address"
+                        />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li
+                    th:class="${productPage.hasPrevious()} ? 'page-item' : 'page-item disabled' "
+            >
+                <a class="page-link"
+                   th:href="@{/products(size=${productPage.size},page=${productPage.number})}"
+                >Previous</a>
+            </li>
+            <li
+                    th:if="${productPage.totalPages > 0}"
+                    th:each="pageNumber : ${pageNumbers}"
+                    th:class="${pageNumber == productPage.number + 1} ? 'page-item active' : 'page-item'">
+                <a class="page-link"
+                   th:href="@{/products(size=${productPage.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                ></a>
+            </li>
+            <li th:class="${productPage.hasNext()} ? 'page-item' : 'page-item disabled'">
+                <a class="page-link"
+                   th:if="${productPage.hasNext()}"
+                   th:href="@{/products(size=${productPage.size},page=${productPage.number + 2})}"
+                >Next</a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
+<script th:src="@{/ui/js/jquery.min.js}"></script>
+<script th:src="@{/ui/js/popper.js}" ></script>
+<script th:src="@{/ui/js/bootstrap.min.js}" ></script>
+<script th:src="@{/ui/js/main.js}"></script>
+</body>
+</html>
