@@ -27,4 +27,8 @@ public class EmployeeServices {
         Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
         return employeeRepository.findAll(EmployeeStatus.ACTIVE,EmployeeStatus.IN_ACTIVE,pageable);
     }
+
+    public Optional<Employee> loginEmpl(String email,String phone){
+        return employeeRepository.loginEmpl(email,phone);
+    }
 }

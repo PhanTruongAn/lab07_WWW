@@ -58,6 +58,11 @@ public class Employee {
         this.status = status;
     }
 
+    public Employee(String email, String phone) {
+        this.email = email;
+        this.phone = phone;
+    }
+
     public long getId() {
         return id;
     }
