@@ -1,6 +1,6 @@
 # lab07_WWW
-# Phương thức CRUD các đối tượng.
-# Login với vai trò là Employee.
+- Phương thức CRUD các đối tượng.
+- Login với vai trò là Employee.
 
 # Sơ đồ mối quan hệ
 # ![image](https://github.com/PhanTruongAn/lab07_WWW/assets/98084458/5e9239dd-1193-478d-bb59-6112e2d80cbb)
