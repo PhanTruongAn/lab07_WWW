@@ -1,5 +1,6 @@
 # lab07_WWW
 - Phương thức CRUD các đối tượng.
+- Phân trang các đối tượng.
 - Login với vai trò là Employee.
 
 # Sơ đồ mối quan hệ
